@@ -17,8 +17,6 @@ signed main(){
     int ans=0;
     int cur=0;
     for(int x=1; x < (1 << n); x++){
-        //cout<<x<<'\n';
-//        if(__builtin_popcount(x) != k) continue;
 
         cur=0;
         for(char i='a'; i<='z'; i++){
