@@ -16,14 +16,14 @@ signed main(){
 
     int n,m;
     cin>>n>>m;
-    for(int i=2; i<=m; i++){
+    for(int i=2; i<=MAX_V; i++){
         if(spf[i]==0){
             prime.push_back(i);
             spf[i]=i;
         }
 
         for(int &p: prime){
-            if(p > spf[i] || 1LL*i*p > m) break;
+            if(p > spf[i] || 1LL*i*p > MAX_V) break;
             spf[i*p]=p;
         }
     }
