@@ -11,7 +11,8 @@ char f(long long t, long long k){
     if(k==1) return fix(s[0] + t%3);
     if(t==0) return s[k-1];
 
-    return fix(f(t-1, (k+1)/2) + k%2);
+    if(k%2 == 1) return fix(f(t-1, (k+1)/2) +1);
+    else return fix(f(t-1, (k+1)/2) +2);
 }
 
 signed main(){
