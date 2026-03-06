@@ -1,8 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define int long long
-
 const int M = 1000000007;
 int n;
 long long dp[100005][2];
