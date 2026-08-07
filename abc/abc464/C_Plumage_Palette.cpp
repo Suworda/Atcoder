@@ -6,9 +6,9 @@ using namespace std;
 const int N = 300005;
 int n,m;
 // int a[N], d[N], b[N];
-vector<tuple<int,int,int>> v;
-multiset<int> mst;
-set<int> st;
+vector<tuple<int,int,int>> v; 
+multiset<int> mst; 
+set<int> st; 
 int ans[300005];
 
 signed main(){
@@ -29,10 +29,8 @@ signed main(){
     int id = 0;
     for(int i=1; i<=m; i++){
         bool flag = 0;
-        // cerr<<i<<'\n';
         if(id < v.size()){
             auto [d,a,b] = v[id];
-            // cerr<<d<<' '<<a<<' '<<b<<'\n';
             if(d == i){
                 mst.erase(mst.find(a));
                 if(mst.find(a) == mst.end()) st.erase(a);
@@ -40,25 +38,21 @@ signed main(){
                 st.insert(b);
                 id++;
                 flag = 1;
-                // i--;
-                // if(id >= v.size()){
-                //     cout<<st.size()<<'\n';
-                //     continue;
-                // }
-                // auto [d2, a2, b2] = v[id];
-
-                // d = d2;
-                // a = a2;
-                // b = b2;
             }
         }
 
         ans[i] = st.size();
         if(flag) i--;
-
-        // cout<<st.size()<<'\n';
     }
 
     for(int i=1; i<=m; i++) cout<<ans[i]<<'\n';
     
 }
+
+int &a = pair.first;
+int &b = pair.second;
+
+auto [a,b] = pair;
+
+1 2 3 5 6 6 
+1 2 3 5 4 6 erase(6) insert(4)
