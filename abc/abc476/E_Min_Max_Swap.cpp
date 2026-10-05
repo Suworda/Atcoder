@@ -63,7 +63,6 @@ void upd(int x, int v, Node *rt){
         return;
     }
 
-    // int m = (rt->l + rt->r)/2;
     if(x <= rt->left->r) upd(x,v,rt->left);
     else upd(x,v,rt->right);
 
@@ -71,15 +70,17 @@ void upd(int x, int v, Node *rt){
 }
 
 pair<int,int> query(int ql, int qr, Node *rt){
-    if(qr < rt->l || rt->r < ql) return {n+1,0};
+    if(qr < rt->l || rt->r < ql) return {-1,-1};
     
     if(ql <= rt->l &&  rt->r <= qr){
         return {rt->mi_id, rt->mx_id};
     }
     
-    
     auto [mi_id1,mx_id1] = query(ql, qr, rt->left);
     auto [mi_id2,mx_id2] = query(ql, qr, rt->right);
+
+    if(mi_id1 == -1 && mx_id1 == -1) return {mi_id2, mx_id2};
+    if(mi_id2 == -1 && mx_id2 == -1) return {mi_id1, mx_id1};
 
     int mi1 = p[mi_id1];
     int mx1 = p[mx_id1];
@@ -89,16 +90,12 @@ pair<int,int> query(int ql, int qr, Node *rt){
     int rst1 = -1;
     int rst2 = -1;
     
-    // cerr << rt->l << ' ' << rt->r << '\n';
-    // cerr << ' ' << mi1 << ' ' << mx1 << ' ' << mi2 << ' ' << mx2 << '\n';
-    
     if(mi1 < mi2) rst1 = mi_id1;
     else rst1 = mi_id2;
     
     if(mx1 > mx2) rst2 = mx_id1;
     else rst2 = mx_id2;
     
-    // cerr << "rst : " << rst1 << ' ' <<rst2 << '\n';
     return {rst1, rst2};
 }
 
@@ -112,14 +109,11 @@ signed main(){
     }
     
     build(1,n,root);
-    p[0] = -1e18;
-    p[n+1] = 1e18;
 
     while(m--){
         int l, r;
         cin>>l>>r;
-        int mi_id = query(l,r,root).first;
-        int mx_id = query(l,r,root).second;
+        auto [mi_id, mx_id] = query(l,r,root);
         int mi = p[mi_id];
         int mx = p[mx_id];
 
