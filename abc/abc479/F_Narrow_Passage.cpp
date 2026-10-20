@@ -34,6 +34,7 @@ struct BIT{
 vector<int> get_rank(vector<int> &v){
     int n = v.size();
     vector<int> rst(n);
+    
     vector<int> d = v;
     sort(d.begin(), d.end());
 
@@ -75,9 +76,7 @@ signed main(){
     auto rkt = get_rank(t);
 
     ll ans = 0;
-    for(int i=0; i<n; i++){
-        ans += abs(t[i] - s[i] - rkt[i] + rks[i]);
-    }
+    for(int i=0; i<n; i++) ans += abs(t[i] - s[i] - rkt[i] + rks[i]);
 
     ans += count_inv(rks, rkt);
 
